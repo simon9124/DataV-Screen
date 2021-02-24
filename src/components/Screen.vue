@@ -1,13 +1,16 @@
 <template>
   <div>
-    <Button>Default</Button>
+    screen
   </div>
 </template>
 
 <script>
 export default {
   name: 'Screen',
-
+  data () {
+    return {
+    }
+  }
 }
 </script>
 
