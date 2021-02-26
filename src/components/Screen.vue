@@ -20,7 +20,13 @@
       <div style="border:1px solid #000;height:300px"
            id="dragTemplate"
            ref="dragTemplate"
-           @mouseup='mouseup'></div>
+           @mouseup='mouseup'>
+        <div v-for="(content,i) in contents"
+             :key="i"
+             v-html="content.html"
+             class="content">
+        </div>
+      </div>
       </Col>
     </Row>
   </div>
@@ -43,6 +49,7 @@ export default {
         { people: 'cn', id: 3, name: 'block' },
         { people: 'us', id: 4, name: 'text' }
       ],
+      contents: []
     };
   },
   methods: {
@@ -53,27 +60,31 @@ export default {
     //拖拽结束事件
     onEnd (e) {
       // console.log(e);
-      console.log(e.item.innerText);
+      // console.log(e.item.innerText);
       switch (e.item.innerText) {
         case 'table':
-          console.log(this.$refs.dragTemplate);
-          var Profile = Vue.extend({
-            template: "<div id='dragTemplate'>" + 'text' + "</div>"
-          });
-          new Profile().$mount("#dragTemplate");
+          // console.log(this.$refs.dragTemplate);
+          // var Profile = Vue.extend({
+          //   template: "<div id='dragTemplate'>" + 'text' + "</div>"
+          // });
+          // new Profile().$mount("#dragTemplate");
+          this.contents.push({ html: `<div>table</div>` })
           break;
         case 'pie':
+          this.contents.push({ html: `<div>pie</div>` })
           break;
         case 'block':
+          this.contents.push({ html: `<div>block</div>` })
           break;
         case 'text':
+          this.contents.push({ html: `<div>text</div>` })
           break;
         default:
           break;
       }
     },
     mouseup (e) {
-      console.log(e);
+      // console.log(e);
     }
   },
 };
@@ -91,5 +102,9 @@ export default {
 /*选中样式*/
 .chosen {
   border: solid 2px #3089dc !important;
+}
+/* 生成的内容 */
+.content {
+  cursor: pointer;
 }
 </style>
