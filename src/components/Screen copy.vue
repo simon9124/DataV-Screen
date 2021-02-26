@@ -19,8 +19,7 @@
       <Col :span="16">
       <div style="border:1px solid #000;height:300px"
            id="dragTemplate"
-           ref="dragTemplate"
-           @mouseup='mouseup'></div>
+           ref="dragTemplate"></div>
       </Col>
     </Row>
   </div>
@@ -42,7 +41,7 @@ export default {
         { people: 'cn', id: 2, name: 'pie' },
         { people: 'cn', id: 3, name: 'block' },
         { people: 'us', id: 4, name: 'text' }
-      ],
+      ]
     };
   },
   methods: {
@@ -72,9 +71,6 @@ export default {
           break;
       }
     },
-    mouseup (e) {
-      console.log(e);
-    }
   },
 };
 </script>
