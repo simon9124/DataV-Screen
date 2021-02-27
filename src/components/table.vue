@@ -1,7 +1,11 @@
 <template>
-  <Table :columns="columns1"
-         :data="data1"></Table>
+  <div @click="click">
+    <Table :columns="columns1"
+           :data="data1"
+           style="cursor:pointer"></Table>
+  </div>
 </template>
+
 <script>
 export default {
   data () {
@@ -47,6 +51,11 @@ export default {
         }
       ]
     }
-  }
+  },
+  methods: {
+    click () {
+      console.log(this.$data)
+    }
+  },
 }
 </script>

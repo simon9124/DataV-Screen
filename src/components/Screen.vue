@@ -29,6 +29,7 @@
 
 <script>
 import Vue from "vue";
+// import Vue from "vue/dist/vue.esm.js";
 import draggable from 'vuedraggable'
 
 export default {
