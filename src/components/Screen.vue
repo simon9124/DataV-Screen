@@ -21,11 +21,6 @@
            id="dragTemplate"
            ref="dragTemplate"
            @mouseup='mouseup'>
-        <div v-for="(content,i) in contents"
-             :key="i"
-             v-html="content.html"
-             class="content">
-        </div>
       </div>
       </Col>
     </Row>
@@ -33,23 +28,19 @@
 </template>
 
 <script>
+import Vue from "vue";
 import draggable from 'vuedraggable'
-import Vue from "vue/dist/vue.esm.js";
 
 export default {
-  components: {
-    draggable,
-  },
+  components: { draggable },
   data () {
     return {
-      //定义要被拖拽对象的数组
-      myArray: [
+      myArray: [ // 要被拖拽对象的数组
         { people: 'cn', id: 1, name: 'table' },
         { people: 'cn', id: 2, name: 'pie' },
         { people: 'cn', id: 3, name: 'block' },
         { people: 'us', id: 4, name: 'text' }
       ],
-      contents: []
     };
   },
   methods: {
@@ -63,21 +54,19 @@ export default {
       // console.log(e.item.innerText);
       switch (e.item.innerText) {
         case 'table':
-          // console.log(this.$refs.dragTemplate);
-          // var Profile = Vue.extend({
-          //   template: "<div id='dragTemplate'>" + 'text' + "</div>"
-          // });
-          // new Profile().$mount("#dragTemplate");
-          this.contents.push({ html: `<div>table</div>` })
+          this.$nextTick(() => {
+            var TableComponent = Vue.extend(require('./table').default);
+            var component = new TableComponent().$mount()
+            // console.log(component);
+            var dom = this.$refs.dragTemplate
+            dom.appendChild(component.$el);
+          })
           break;
         case 'pie':
-          this.contents.push({ html: `<div>pie</div>` })
           break;
         case 'block':
-          this.contents.push({ html: `<div>block</div>` })
           break;
         case 'text':
-          this.contents.push({ html: `<div>text</div>` })
           break;
         default:
           break;
