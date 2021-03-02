@@ -1,11 +1,14 @@
 <template>
-  <div @mousedown="move"
-       @click="click"
+  <!-- @click="click" -->
+  <div @mousedown="dragComponent"
        ref="component"
-       style="width:60%;position:relative">
+       class="component">
+
+    <!-- table -->
     <Table :columns="columns"
-           :data="data"
-           style="cursor:pointer"></Table>
+           :data="data">
+    </Table>
+
     <!-- modal - 数据 -->
     <Modal v-model="modalShow"
            title="Table props"
@@ -90,9 +93,10 @@ export default {
     ok () {
       this.data = JSON.parse(JSON.stringify(this.dataCopy))
     },
-    move (e) {
+    // 自由拖拽
+    dragComponent (e) {
       let odiv = this.$refs.component // 获取目标元素
-      //算出鼠标相对元素的位置
+      // 算出鼠标相对元素的位置
       let disX = e.clientX - odiv.offsetLeft;
       let disY = e.clientY - odiv.offsetTop;
       document.onmousemove = (e) => { // 鼠标按下并移动的事件
@@ -111,3 +115,17 @@ export default {
   },
 }
 </script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
+.component {
+  // position: relative;
+  position: absolute;
+  width: 600px;
+  box-sizing: content-box;
+  cursor: move;
+  &:hover {
+    border: 1px solid #5cadff;
+    border-style: dashed;
+  }
+}
+</style>
