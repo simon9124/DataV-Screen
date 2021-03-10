@@ -3,7 +3,7 @@
        class="layout"
        @click.stop="menuClose">
     <Layout>
-      <Header style="height:40px;background:#2e2e2e"></Header>
+      <Header style="height:48px;background:#2e2e2e"></Header>
       <Layout>
         <Sider hide-trigger>
           <side-menu ref="sideMenu"></side-menu>
@@ -18,7 +18,7 @@
 
 <script>
 import SideMenu from './components/SideMenu'
-import Screen from './components/Screen.vue'
+import Screen from './components/Screen/index.vue'
 
 export default {
   name: 'App',
@@ -28,8 +28,12 @@ export default {
   },
   methods: {
     // 点击界面任意部位，调用子组件事件关闭二级菜单 - 阻止冒泡
-    menuClose () {
-      this.$refs.sideMenu.menuClose()
+    menuClose (e) {
+      // console.log(e.target.className);
+      // 排除二级菜单
+      if (e.target.className.indexOf('menu2') == -1) {
+        this.$refs.sideMenu.menuClose()
+      }
     }
   },
 }
@@ -44,12 +48,12 @@ export default {
 .layout {
   .ivu-layout-has-sider {
     .ivu-layout-content {
-      height: calc(100vh - 40px) !important;
+      height: calc(100vh - 48px) !important;
     }
   }
   .ivu-layout-sider {
     background: #202020;
-    width: 70px !important;
+    width: 80px !important;
     min-width: auto !important;
     max-width: auto !important;
     flex: none !important;

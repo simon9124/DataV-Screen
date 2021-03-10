@@ -1,0 +1,76 @@
+.layout {
+
+  // 左侧side-bar
+  .ivu-layout-sider {
+    background: #202020;
+
+    // 一级菜单
+    .ivu-menu {
+      background: #202020;
+      position: relative;
+
+      &-item {
+        padding: 10px;
+        height: 80px;
+        text-align: center;
+
+        i {
+          margin: 0;
+          font-size: 40px;
+        }
+
+        span {
+          display: block;
+          font-size: 12px;
+          margin-top: 3px;
+        }
+      }
+    }
+
+    // 二级菜单
+    .menu-second {
+      width: 330px;
+      height: 350px;
+      background: #202020;
+      position: absolute;
+      left: 90px;
+      color: #fff;
+      padding: 20px 20px 5px;
+      text-align: center;
+      overflow: auto;
+      z-index: 100;
+
+      .ivu-col {
+        margin-bottom: 15px;
+      }
+
+      .block {
+        height: 50px;
+        background: #2e2e2e;
+      }
+
+      p {
+        font-size: 12px;
+        color: #bdbdbd;
+        margin-top: 3px;
+      }
+    }
+
+    // 滚动条
+    .menu-second::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+    }
+
+    .menu-second::-webkit-scrollbar-thumb {
+      background-color: rgba(102, 102, 102, 0.7); // rgba(64, 158, 255, 0.5);
+      // outline: 1px solid slategrey;
+      border-radius: 5px;
+    }
+
+    .menu-second::-webkit-scrollbar {
+      width: 8px;
+    }
+  }
+
+}

@@ -5,9 +5,11 @@
        class="component">
 
     <!-- table -->
-    <Table :columns="columns"
+    <!-- <Table :columns="columns"
            :data="data">
-    </Table>
+    </Table> -->
+    <dv-scroll-board :config="config"
+                     style="height:220px" />
 
     <!-- modal - 数据 -->
     <Modal v-model="modalShow"
@@ -77,6 +79,20 @@ export default {
       ],
       columnsCopy: [], // 表头列项 - 副本
       dataCopy: [], // 表格数据 - 副本
+      config: { // 表格配置
+        header: ['Name', 'Age', 'Address', 'Date'], // 表头
+        data: [ // 数据
+          ['John Brown', 18, 'New York No. 1 Lake Park', '2016-10-03'],
+          ['Jim Green', 24, 'London No. 1 Lake Park', '2016-10-01'],
+          ['Joe Black', 30, 'Sydney No. 1 Lake Park', '2016-10-02'],
+          ['Jon Snow', 26, 'Ottawa No. 2 Lake Park', '2016-10-04'],
+          ['John Brown', 18, 'New York No. 1 Lake Park', '2016-10-03'],
+          ['Jim Green', 24, 'London No. 1 Lake Park', '2016-10-01'],
+          ['Joe Black', 30, 'Sydney No. 1 Lake Park', '2016-10-02'],
+          ['Jon Snow', 26, 'Ottawa No. 2 Lake Park', '2016-10-04'],
+        ]
+      },
+      configCopy: {}, // 表格配置 - 副本
       /* 弹框 */
       modalShow: false // 是否显示
     }
