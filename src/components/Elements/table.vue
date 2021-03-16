@@ -4,10 +4,6 @@
        ref="component"
        class="component">
 
-    <!-- table -->
-    <!-- <Table :columns="columns"
-           :data="data">
-    </Table> -->
     <dv-scroll-board :config="config"
                      style="height:220px" />
 
@@ -37,48 +33,6 @@ export default {
   data () {
     return {
       /* 表格 */
-      columns: [ // 表头列项 - 使用
-        {
-          title: 'Name',
-          key: 'name'
-        },
-        {
-          title: 'Age',
-          key: 'age'
-        },
-        {
-          title: 'Address',
-          key: 'address'
-        }
-      ],
-      data: [ // 表格数据 - 使用
-        {
-          name: 'John Brown',
-          age: 18,
-          address: 'New York No. 1 Lake Park',
-          date: '2016-10-03'
-        },
-        {
-          name: 'Jim Green',
-          age: 24,
-          address: 'London No. 1 Lake Park',
-          date: '2016-10-01'
-        },
-        {
-          name: 'Joe Black',
-          age: 30,
-          address: 'Sydney No. 1 Lake Park',
-          date: '2016-10-02'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        }
-      ],
-      columnsCopy: [], // 表头列项 - 副本
-      dataCopy: [], // 表格数据 - 副本
       config: { // 表格配置
         header: ['Name', 'Age', 'Address', 'Date'], // 表头
         data: [ // 数据
@@ -100,14 +54,12 @@ export default {
   methods: {
     // 点击打开弹框
     click () {
-      // console.log(this.$data)
       this.modalShow = true;
-      this.columnsCopy = JSON.parse(JSON.stringify(this.columns))
-      this.dataCopy = JSON.parse(JSON.stringify(this.data))
+      this.configCopy = JSON.parse(JSON.stringify(this.config))
     },
     // 弹框确认
     ok () {
-      this.data = JSON.parse(JSON.stringify(this.dataCopy))
+      // this.data = JSON.parse(JSON.stringify(this.dataCopy))
     },
     // 自由拖拽
     dragComponent (e) {

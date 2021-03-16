@@ -2,9 +2,58 @@
   height: 100%;
   padding: 15px;
   background: #505050;
+  padding-right: 380px;
+  position: relative;
 
   #dragTemplate {
+    // height: 100%;
+  }
+
+  #panel ::v-deep {
+    width: 300px;
     height: 100%;
-    // background: #070f20;
+    background: #202020;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+
+    .ivu-form-item-label {
+      color: #fff;
+    }
+
+    .ivu-form-item-content {
+      .ivu-input {
+        border: none;
+        border-bottom: 1px solid #404040;
+        border-radius: 0;
+        background: transparent;
+        color: #afafaf;
+        padding: 0;
+        height: 28px;
+        line-height: 28px;
+
+        &:focus {
+          box-shadow: none;
+          border-bottom: 1px solid #2D8Cf0;
+        }
+      }
+
+      .inline-input {
+        display: inline-block;
+        width: 95px;
+
+        &-label {
+          color: #fff;
+          display: inline-block;
+          vertical-align: sub;
+          margin-right: 10px;
+
+          &:not(:first-child) {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
   }
 }
