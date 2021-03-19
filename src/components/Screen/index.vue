@@ -6,8 +6,8 @@
          :style="{'position':'relative',
                   'background':styleProps.background,
                   'width':screenWidthReal+'px',
-                  'height':screenHeightReal+'px'}"
-         @mouseup.prevent="mouseup">
+                  'height':screenHeightReal+'px'}">
+      <!-- @mouseup.prevent="mouseup" -->
     </div>
     <!-- 右侧面板 -->
     <Panel :style-props="styleProps"
@@ -17,7 +17,7 @@
 
 <script>
 import Vue from "vue";
-import Panel from '@/components/Panel'
+import Panel from '@/components/Panel' // 右侧面板
 
 export default {
   components: {
@@ -29,6 +29,7 @@ export default {
         background: '#070f20', // 画布背景
         width: 16, // 画布宽度比
         height: 10 // 画布高度比
+
       },
       screenWidthReal: 0, // 画布宽度
       screenHeightReal: 0, // 画布高度
@@ -46,32 +47,27 @@ export default {
       })();
     };
     // 插入元素
-    this.$bus.$on('insert-component', component => {
-      switch (component) {
-        case '轮播表':
-          this.$nextTick(() => {
-            var TableComponent = Vue.extend(require('@/components/Elements/table').default);
-            var component = new TableComponent().$mount()
-            // console.log(component);
-            var dom = this.$refs.dragTemplate
-            dom.appendChild(component.$el);
-            this.$refs.dragTemplate.click() // 点击界面，触发App.vue的menuClose事件
-          })
-          break;
-        case 'pie':
-          break;
-        case 'block':
-          break;
-        case 'text':
-          break;
-        default:
-          break;
-      }
+    this.$bus.$on('insert-component', componentName => {
+      this.$nextTick(() => {
+        /* 1.插入元素 */
+        var TableComponent = Vue.extend(require('@/components/Elements').default);
+        var component = new TableComponent({
+          propsData: {
+            componentName: componentName
+          }
+        }).$mount()
+        // console.log(component);
+        var dom = this.$refs.dragTemplate
+        dom.appendChild(component.$el);
+        /* 2.默认点击一次画布，确保menu再次点击能够打开 */
+        this.$refs.dragTemplate.click()
+        /* 3.自动点击插入的元素：① 触发右侧面板更新 ② 关闭二级菜单 */
+        component.click()
+      })
     })
   },
   methods: {
     mouseup () {
-      // console.log('1');
     },
     // 计算画布宽高
     computedScreenSize () {
