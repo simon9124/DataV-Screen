@@ -1,7 +1,7 @@
 <template>
   <div id="app"
        class="layout"
-       @click.stop="menuClose">
+       @click="menuClose">
     <Layout>
       <Header style="height:48px;background:#2e2e2e"></Header>
       <Layout>
@@ -9,7 +9,7 @@
           <side-menu ref="sideMenu"></side-menu>
         </Sider>
         <Content style="background:#fff;height:calc(100vh)">
-          <screen></screen>
+          <screen ref="screen"></screen>
         </Content>
       </Layout>
     </Layout>
@@ -30,11 +30,17 @@ export default {
     // 点击界面任意部位，调用子组件事件关闭二级菜单 - 阻止冒泡
     menuClose (e) {
       // console.log(e.target.className);
-      // 排除二级菜单
-      if (e.target.className.indexOf('menu2') == -1) {
-        this.$refs.sideMenu.menuClose()
+      if (e.target.className.indexOf('menu2') === -1) { // 排除二级菜单
+        if (this.$refs.sideMenu.$data.menuSecondVisible === true) {
+          this.$refs.sideMenu.menuClose()
+        } else {
+          this.$bus.$emit('click-component', {
+            componentName: "大屏设置",
+            data: this.$refs.screen.$data.styleProps
+          })
+        }
       }
-    }
+    },
   },
 }
 </script>
