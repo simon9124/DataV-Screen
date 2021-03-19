@@ -66,6 +66,14 @@ export default {
       menuSecondTop: '', // 距离顶部的动态高度
     }
   },
+  mounted () {
+    // 接收兄弟组件事件：关闭二级菜单
+    this.$bus.$on('menu-close', () => {
+      this.$nextTick(() => {
+        this.menuClose()
+      })
+    })
+  },
   methods: {
     // 选中一级菜单
     menuSelect (name) {
@@ -76,7 +84,6 @@ export default {
     // 关闭二级菜单
     menuClose () {
       this.menuSecondVisible = false
-      this.activeName = '-1'
     },
     // 开始拖拽事件
     onMove () {
