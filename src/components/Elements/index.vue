@@ -31,11 +31,12 @@ export default {
   methods: {
     // 点击组件
     click () {
-      // console.log(this.componentName, this.$refs.element.$data);
+      // console.log(this.$refs.element);
       this.$bus.$emit('menu-close') // 传递事件给兄弟组件：关闭二级菜单
-      this.$bus.$emit('click-component', {
+      this.$bus.$emit('click-component', { // 传递事件给兄弟组件：更新右侧面板
         componentName: this.componentName,
-        data: this.$refs.element.$data
+        data: this.$refs.element.$data,
+        uid: this.$refs.element._uid
       })
     },
     // 自由拖拽

@@ -35,7 +35,7 @@
                    :move="onMove"
                    @end="onEnd(item)">
           <transition-group>
-            <div class='block'
+            <div class='block menu2'
                  :key="item.title">
             </div>
           </transition-group>

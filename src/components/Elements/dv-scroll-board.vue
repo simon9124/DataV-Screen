@@ -24,6 +24,13 @@ export default {
       },
     }
   },
+  mounted () {
+    this.$bus.$on('attribute-update', config => {
+      // console.log(config);
+      // console.log(this.$data);
+      // this.config = config
+    })
+  }
 }
 </script>
 

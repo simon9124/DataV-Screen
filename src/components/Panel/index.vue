@@ -24,9 +24,11 @@
       <!-- 轮播表 -->
       <FormItem v-if="elementName==='轮播表'"
                 label="数据">
-        <Input v-model="formData.background"
+        <Input v-model="formData.componentName"
                @on-blur="onBlur"></Input>
       </FormItem>
+
+      <!-- 排名轮播表 -->
 
     </Form>
   </div>
@@ -35,8 +37,8 @@
 <script>
 export default {
   props: {
-    // 面板表单数据 - 原始
-    styleProps: {
+    // 面板表单数据 - 初始大屏
+    screenProps: {
       type: Object,
       default: () => { }
     },
@@ -48,18 +50,21 @@ export default {
     }
   },
   mounted () {
+    // 接收兄弟组件数据，更新右侧面板
     this.$bus.$on('click-component', obj => {
       console.log('panel', obj);
+      this.formData = obj.data.config
       this.elementName = obj.componentName
     })
   },
   created () {
-    this.formData = JSON.parse(JSON.stringify(this.styleProps))
+    // 初始大屏数据，渲染右侧面板
+    this.formData = JSON.parse(JSON.stringify(this.screenProps))
   },
   methods: {
-    // input框失去焦点
+    // input框失去焦点，向父组件Sreen和兄弟组件发送事件：更新面板表单数据
     onBlur () {
-      this.$emit('attribute-update', this.formData)
+      this.$bus.$emit('attribute-update', this.formData)
     }
   },
 }
