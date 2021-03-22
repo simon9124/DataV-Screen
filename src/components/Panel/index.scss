@@ -7,11 +7,26 @@
   right: 0;
   padding: 20px;
 
+  .ivu-form-item {
+    position: relative;
+  }
+
   .ivu-form-item-label {
     color: #fff;
   }
 
   .ivu-form-item-content {
+    .button-add {
+      width: 15px;
+      height: 15px;
+      line-height: 15px;
+      font-size: 10px;
+      padding: 0;
+      position: absolute;
+      top: -25px;
+      left: 50px;
+    }
+
     .ivu-input {
       border: none;
       border-bottom: 1px solid #404040;
@@ -41,6 +56,36 @@
         &:not(:first-child) {
           margin-left: 20px;
         }
+      }
+    }
+
+    .ivu-collapse {
+      background: transparent;
+      border: none;
+
+      &-item {
+        border: none;
+      }
+
+      &-header {
+        padding: 0;
+        height: 28px;
+        line-height: 28px;
+        color: #fff;
+
+        i {
+          margin: 0;
+
+        }
+
+        .not-rotate {
+          transform: none;
+          margin-left: 10px;
+        }
+      }
+
+      &-content {
+        background: transparent;
       }
     }
   }

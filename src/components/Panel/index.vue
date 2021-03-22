@@ -32,14 +32,30 @@
       </FormItem>
       <FormItem v-if="elementName==='轮播表'"
                 label="表数据">
-        <div v-for="(item,i) in formData.data"
-             :key="i">
-          <span v-for="(_item,_i) in item"
-                :key="_i">
-            <Input :value="_item"
-                   @on-blur="onBlur('轮播表','data',i,_i)"></Input>
-          </span>
-        </div>
+        <Button class="button-add"
+                ghost
+                type="primary"
+                @click.stop="add('轮播表','data')">
+          <Icon type="md-add"
+                class="i-add" />
+        </Button>
+        <Collapse simple
+                  accordion
+                  v-model="collapseActiveName">
+          <Panel v-for="(row,i) in formData.data"
+                 :key="i">
+            第{{i+1}}行
+            <Icon type="ios-trash-outline"
+                  class="not-rotate"
+                  @click.stop="del('轮播表','data',i)" />
+            <div slot="content"
+                 v-for="(col,_i) in row"
+                 :key="_i">
+              <Input :value="col"
+                     @on-blur="onBlur('轮播表','data',i,_i)"></Input>
+            </div>
+          </Panel>
+        </Collapse>
       </FormItem>
 
       <!-- 排名轮播表 -->
@@ -60,7 +76,8 @@ export default {
   data () {
     return {
       elementName: '大屏设置', // 元素类型
-      formData: {} // 面板表单数据
+      formData: {}, // 面板表单数据
+      collapseActiveName: "0" // 手风琴激活的面板的namea
     }
   },
   mounted () {
@@ -70,6 +87,7 @@ export default {
       document.getElementsByTagName('input').forEach(ele => { ele.blur() }) // 主动触发所有的inpu框失去焦点
       this.formData = obj.data.config
       this.elementName = obj.componentName
+      this.collapseActiveName = "0"
     })
   },
   created () {
@@ -85,6 +103,20 @@ export default {
       } else if (index !== undefined) {
         this.$set(this.formData[type], index, event.target.value)
       }
+      this.$bus.$emit('attribute-update', this.formData)
+    },
+    // 面板事件：追加
+    add (componentName, type) {
+      if (componentName === "轮播表") {
+        this.$set(this.formData[type], this.formData[type].length, ['', '', ''])
+        this.collapseActiveName = (this.formData[type].length - 1).toString()
+      }
+      this.$bus.$emit('attribute-update', this.formData)
+    },
+    // 面板事件：删除
+    del (componentName, type, index) {
+      // console.log(componentName, type, index);
+      this.$delete(this.formData[type], index)
       this.$bus.$emit('attribute-update', this.formData)
     }
   },
