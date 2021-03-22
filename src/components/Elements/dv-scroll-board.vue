@@ -15,20 +15,23 @@ export default {
           ['行3列1', '行3列2', '行3列3'],
           ['行4列1', '行4列2', '行4列3'],
           ['行5列1', '行5列2', '行5列3'],
-          ['行6列1', '行6列2', '行6列3'],
-          ['行7列1', '行7列2', '行7列3'],
-          ['行8列1', '行8列2', '行8列3'],
-          ['行9列1', '行9列2', '行9列3'],
-          ['行10列1', '行10列2', '行10列3']
-        ]
+          ['行6列1', '行6列2', '行6列3']
+        ],
+        uid: this._uid // 组件id
       },
     }
   },
   mounted () {
+    // 接收兄弟组件事件：属性面板数据更新
     this.$bus.$on('attribute-update', config => {
-      // console.log(config);
-      // console.log(this.$data);
-      // this.config = config
+      if (this._uid === config.uid) {
+        // console.log(config);
+        this.config = {
+          header: config.header,
+          data: config.data,
+          uid: this._uid
+        }
+      }
     })
   }
 }
