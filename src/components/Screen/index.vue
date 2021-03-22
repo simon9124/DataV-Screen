@@ -66,10 +66,11 @@ export default {
     })
     // 接收子组件事件：属性面板数据更新
     this.$bus.$on('attribute-update', config => {
-      console.log(config);
-
-      // this.config = config
-      this.computedScreenSize()
+      // console.log(config);
+      if (this._uid === config.uid) {
+        this.config = config
+        this.computedScreenSize()
+      }
     })
   },
   methods: {
