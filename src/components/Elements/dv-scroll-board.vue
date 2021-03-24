@@ -8,7 +8,7 @@ export default {
   data () {
     return {
       config: {
-        header: ['列1', '列2', '列3'], // 表头
+        uid: this._uid, // 组件id
         data: [ // 数据
           ['行1列1', '行1列2', '行1列3'],
           ['行2列1', '行2列2', '行2列3'],
@@ -17,7 +17,15 @@ export default {
           ['行5列1', '行5列2', '行5列3'],
           ['行6列1', '行6列2', '行6列3']
         ],
-        uid: this._uid // 组件id
+        hasHeader: true, // 是否包含表头
+        header: ['列1', '列2', '列3'], // 表头
+        headerBGC: '#00BAFF', // 表头背景色
+        headerHeight: 35, // 表头高度
+        index: false, // 显示行号
+        indexHeader: '#', // 行号表头
+        waitTime: 2000, // 轮播时间间隔(ms)
+        carousel: 'single', // 轮播方式
+        hoverPause: true, // 悬浮暂停轮播
       },
     }
   },
@@ -27,9 +35,17 @@ export default {
       if (this._uid === config.uid) {
         // console.log(config);
         this.config = {
-          header: config.header,
+          uid: this._uid,
           data: config.data,
-          uid: this._uid
+          hasHeader: config.hasHeader,
+          header: config.hasHeader ? config.header : [],
+          headerBGC: config.headerBGC,
+          headerHeight: config.headerHeight,
+          index: config.index,
+          indexHeader: config.indexHeader,
+          waitTime: config.waitTime,
+          carousel: config.carousel,
+          hoverPause: config.hoverPause,
         }
       }
     })

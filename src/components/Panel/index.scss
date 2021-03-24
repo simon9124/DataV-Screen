@@ -9,6 +9,10 @@
 
   .ivu-form-item {
     position: relative;
+
+    .indent-content {
+      margin-left: 10px;
+    }
   }
 
   .ivu-form-item-label {
@@ -45,17 +49,12 @@
 
     .inline-input {
       display: inline-block;
-      width: 95px;
 
       &-label {
         color: #fff;
         display: inline-block;
         vertical-align: sub;
         margin-right: 10px;
-
-        &:not(:first-child) {
-          margin-left: 20px;
-        }
       }
     }
 
