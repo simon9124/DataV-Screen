@@ -6,6 +6,7 @@
   top: 0;
   right: 0;
   padding: 20px;
+  overflow: auto;
 
   .ivu-form-item {
     position: relative;
@@ -87,5 +88,35 @@
         background: transparent;
       }
     }
+
+    .ivu-select {
+      &-selection {
+        background: transparent;
+        color: #afafaf;
+        height: 28px;
+        border-radius: 0;
+      }
+
+      &-selected-value {
+        line-height: 28px;
+      }
+    }
   }
+}
+
+
+// 滚动条
+#panel::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+#panel::-webkit-scrollbar-thumb {
+  background-color: rgba(102, 102, 102, 0.7); // rgba(64, 158, 255, 0.5);
+  // outline: 1px solid slategrey;
+  border-radius: 5px;
+}
+
+#panel::-webkit-scrollbar {
+  width: 8px;
 }
