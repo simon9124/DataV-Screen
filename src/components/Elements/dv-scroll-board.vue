@@ -9,7 +9,7 @@ export default {
     return {
       config: {
         uid: this._uid, // 组件id
-        data: [ // 数据
+        data: [ // 表数据
           ['行1列1', '行1列2', '行1列3'],
           ['行2列1', '行2列2', '行2列3'],
           ['行3列1', '行3列2', '行3列3'],
@@ -17,6 +17,9 @@ export default {
           ['行5列1', '行5列2', '行5列3'],
           ['行6列1', '行6列2', '行6列3']
         ],
+        rowNum: 5, // 表行数
+        align: ['left', 'left', 'left'], // 列对齐方式
+        columnWidth: [], // 列宽
         hasHeader: true, // 是否包含表头
         header: ['列1', '列2', '列3'], // 表头
         headerBGC: '#00BAFF', // 表头背景色
@@ -37,6 +40,9 @@ export default {
         this.config = {
           uid: this._uid,
           data: config.data,
+          rowNum: config.rowNum,
+          align: config.align,
+          columnWidth: config.columnWidth.filter(item => item !== 'auto').map(item => parseInt(item)),
           hasHeader: config.hasHeader,
           header: config.hasHeader ? config.header : [],
           headerBGC: config.headerBGC,
